@@ -1,0 +1,24 @@
+{
+  "name": "utility",
+  "version": "1.0.0",
+  "description": "utility functions, for use on programming challenges",
+  "main": "spec.js",
+  "scripts": {
+    "test": "mocha --watch spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KevinGin/Utility.git"
+  },
+  "author": "Kevin Gin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KevinGin/Utility/issues"
+  },
+  "homepage": "https://github.com/KevinGin/Utility#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.3.0",
+    "nodemon": "^1.11.0"
+  }
+}
