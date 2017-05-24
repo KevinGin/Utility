@@ -1,10 +1,10 @@
 const chai = require('chai'); 
 const expect = require('chai').expect;
 
-// var {choose, combinations, _combinations} = require('./util.js')
 
 var {choose, combinations} = require('./src/combinatorics.js');
 var {weight, occurrenceMap} = require('./src/strings.js');
+var {primesTo, relativelyPrime, squareProducts} = require('./src/primes.js');
 
 
 describe('Combinatorics', function() {
@@ -62,3 +62,36 @@ describe('Strings', function() {
     expect(occurrences[46]).to.equal(2); // 2 occurrences of '.'
   })
 })
+
+describe('Primes', function() {
+  it ('sieve should return all primes below n', function () {
+    var results = primesTo(11);
+    var primes = [2,3,5,7];
+    expect(results.length).to.equal(4);
+    primes.forEach((v,i) => {
+      expect(v).to.equal(primes[i]);
+    })
+  }) 
+  it ('should correctly determine whether distinct pos ints are relatively prime', function() {
+    for (var i = 1; i < 5; i++) {
+      expect(relativelyPrime(i,5)).to.equal(true);
+    }
+    for (var i = 2; i <= 20; i+=2) {
+      expect(relativelyPrime(i,20)).to.equal(false);
+    }
+    expect(relativelyPrime(10,3)).to.equal(true);
+    expect(relativelyPrime(9,3)).to.equal(false);
+  })
+  it ('should find all pairs of ints < n that have square products', function() {
+    var resultString = '';
+    var squareProductString = '14281949';
+    squareProducts(10,(a,b) => {
+      resultString += a;
+      resultString += b;
+    });
+    expect(resultString).to.equal(squareProductString);
+  })
+})
+
+
+
