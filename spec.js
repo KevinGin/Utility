@@ -2,9 +2,9 @@ const chai = require('chai');
 const expect = require('chai').expect;
 
 
-var {choose, combinations} = require('./src/combinatorics.js');
-var {weight, occurrenceMap} = require('./src/strings.js');
-var {primesTo, relativelyPrime, squareProducts} = require('./src/primes.js');
+const {choose, combinations} = require('./src/combinatorics.js');
+const {weight, occurrenceMap} = require('./src/strings.js');
+const {primesTo, relativelyPrime, squareProducts} = require('./src/primes.js');
 
 
 describe('Combinatorics', function() {
@@ -24,19 +24,26 @@ describe('Combinatorics', function() {
     });
   })
 
+  
   // modify prototype
-  Array.prototype.combinations = function(...args) {
+  const _combinations = Symbol();
+  Array.prototype._combinations = function(...args) {
     combinations.apply(null,[this, ...args])
   }
 
   it ('method call should give correct number of combinations', function() {
     var a = ['rock','paper','scissors','candy'];
+    var callbackCalled = false;
     for (var k = 0; k <= 5; k ++) {
       b = [];
-      a.combinations(k, (combination) => b.push(combination));
-      // expect(b.length).to.equal(choose(a.length,k));
+      a._combinations(k, (combination) => {
+        callbackCalled = true;
+        b.push(combination)
+      });
+      expect(b.length).to.equal(choose(a.length,k));
       b.forEach(combination => expect(combination.length).to.equal(k));
     }
+    expect(callbackCalled).to.equal(true);
   })
 })
 
