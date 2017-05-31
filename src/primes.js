@@ -23,19 +23,8 @@ module.exports = {primesTo, relativelyPrime, squareProducts, relativelyPrime}
 // }
 
 
-function relativelyPrime(n,m) {
-  if (n % 2 === 0 && m % 2 === 0) {
-    return false
-  }
-  for (var i = 3; i <= Math.min(n,m); i++) {
-    if (n % i === 0 && m % i === 0) {
-      return false
-    }
-  }
-  return true;
-}
 
-// This is a very fast prime sieve -- I haven't found any faster in JS
+// This is a very fast prime sieve -- I haven't found any faster in JS. Returns array of primes
 function primesTo(n) {
   var primes = [];
   var array = new Array(n)
@@ -49,6 +38,21 @@ function primesTo(n) {
   }
   return primes;
 }
+
+// prime sieve, but returns array of booleans, rather than array of primes
+function primesToAlt(n) {
+  var sieve = new Array(n+1).fill(true);
+  sieve[0] = sieve[1] = false;
+  for (var i = 2; i < n; i++) {
+    if (sieve[i]) {
+      for (var j = i*2; j <= n; j+= i) {
+        sieve[j] = false;
+      }
+    }
+  }
+  return sieve;
+}
+
 
 // Checks to see if n and m are relatively Prime
 function relativelyPrime(n,m) {
