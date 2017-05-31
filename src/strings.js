@@ -1,12 +1,32 @@
-module.exports = {
-	weight: weight,
-  occurrenceMap: occurrenceMap
-}
+module.exports = {weight, weightUpper,occurrenceMap}
+
 
 // returns lowercase 'weight' of lowercase character. Useful for creating arrays, where indices proxy for characters.
-// weight(a) => 0; weight(b) => 1, etc.
+// weight('a') => 1; weight('b') => 2, etc.
 function weight(char) {
-  return char.charCodeAt(0)-97;
+  return char.charCodeAt(0)-96;
+}
+// same but with uppercase. wordWeightUpper('A') => 1
+function weightUpper(char) {
+	return char.charCodeAt(0)-64;
+}
+
+// calculates weigth of entire lowercase word  ('ab') => 3
+function wordWeight(char) {
+	var sum = 0;
+	for (var i = 0; i < str.length; i++) {
+		sum += str.charCodeAt(i) - 96;
+	}
+	return sum;
+}
+
+// same but with upper ('AB') => 3
+function wordWeightUpper(str) {
+	var sum = 0;
+	for (var i = 0; i < str.length; i++) {
+		sum += str.charCodeAt(i) - 64;
+	}
+	return sum;
 }
 
 // returns an array, where indices correspond to ascii values, and values correspond to number of instances
