@@ -37,3 +37,39 @@ function occurrenceMap(asciiString) {
   }
   return results;
 }
+
+// returns a boolean object, with letters as keys
+function mapChars(string) {
+  var results = {};
+  for (var i = 0; i < string.length; i ++) {
+    results[string[i]] = true;
+  }
+  return results;
+}
+
+
+// returns a boolean objct, indicating which letters occur in every word
+// basically just a union function after converting to object
+function occursInEvery(arrayOfWords) {
+  function combine(acc,word) {
+    var results = {};
+    for (var i = 0; i < word.length; i++) {
+      var char = word[i];
+      if (acc[char]) {
+        results[char] = true;
+      }
+    }
+    return results;
+  }
+	return arrayOfWords.reduce(combine,mapChars(arrayOfWords[0]));
+}
+
+
+
+
+var arrayOfWords = ['abpc','apple'];
+
+var result = occursInEvery(arrayOfWords);
+console.log(result);
+
+
